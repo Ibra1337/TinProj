@@ -1,0 +1,27 @@
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host: 'your_database_host',
+  user: 'your_username',
+  password: 'your_password',
+  database: 'your_database',
+});
+
+connection.connect();
+
+const script = `
+  -- Your SQL script here
+`;
+
+// Split the script into individual statements (assuming each statement ends with a semicolon)
+const statements = script.split(';');
+
+// Execute each SQL statement
+statements.forEach((sql) => {
+  connection.query(sql.trim(), (error, results, fields) => {
+    if (error) throw error;
+    console.log('Result:', results);
+  });
+});
+
+connection.end();
