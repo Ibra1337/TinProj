@@ -63,6 +63,7 @@ CREATE TABLE prodInCart (
 CREATE TABLE product (
     prodId integer NOT NULL CONSTRAINT product_pk PRIMARY KEY,
     name varchar(50) NOT NULL,
+    shortDesc varchar(50) NOT NULL,
     price decimal(10,2) NOT NULL
 );
 

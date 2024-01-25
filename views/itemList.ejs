@@ -5,18 +5,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
     <title>Item List</title>
 </head>
 
 <body>
+
+    <div class="topbar" id="topbar" name="topbar">
+        <div class="leftpart" id="leftpart">
+            <a href="/"> <img src="./images/craiyon_201945_abstract_neon_purple_blue_game_controller_concept_art_logo.png" height="50" width="50"> </a>
+        </div>
+            <div class="rightpart" id="rightpart">
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+    
     <h1>Item List</h1>
 
     <% if (items && items.length > 0) { %>
+    <div class="itemList" id="itemList" name = itemList>
         <table border="1">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Product Name</th>
+                    <th>Descritpion</th>
                     <th>Price</th>
                     <th>Add to Cart</th>
                     <th>More Details</th>
@@ -25,22 +40,24 @@
             <tbody>
                 <% items.forEach(item => { %>
                     <tr>
-                        <td><%= item.id %></td>
+                        <td><%= item.prodId %></td>
                         <td><%= item.name %></td>
+                        <td><%= item.shortDesc %></td>
                         <td><%= item.price %></td>
                         <td>
                             <form action="/addToCart" method="post">
-                                <input type="hidden" name="productId" value="<%= item.id %>">
+                                <input type="hidden" name="productId" value="<%= item.prodId %>">
                                 <button type="submit">Add to Cart</button>
                             </form>
                         </td>
                         <td>
-                            <a href="/productDetails/<%= item.id %>">More Details</a>
+                            <a href="/details/prodid=<%= item.prodId %>">More Details</a>
                         </td>
                     </tr>
                 <% }); %>
             </tbody>
         </table>
+    </div>
     <% } else { %>
         <p>No items available.</p>
     <% } %>

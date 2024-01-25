@@ -1,0 +1,43 @@
+body {
+    background: blueviolet url('../images/bg.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}/* Other styles remain unchanged */
+.topbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: gray;
+}
+
+.leftpart {
+    text-align: left;
+}
+
+.rightpart {
+    text-align: right;
+}
+
+.itemList {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: whitesmoke;
+    background: local;
+}
+
+.itemList table {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: blueviolet;
+}
+
+#baner {
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: blueviolet;
+}

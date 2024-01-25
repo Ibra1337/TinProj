@@ -18,8 +18,23 @@ class ItemListController
         res.render('itemList' , {items} );
     }
 
+    get_details = async(req , res ) => {
+        const prodid = req.params.productId;
+        console.log(prodid)
+        let descriptions = await dbHandelr.getProdDescription(db , prodid);
+        console.log(descriptions)
+        res.render('itemDetails' , {descriptions})
+    }
 
+    post_addToCart = async(req , res ) => 
+    {
+        const prodid = req.body.productId ;  
+        console.log("to cart has been added: " , prodid);
+
+        res.redirect('/');
+    }
 }
+
 module.exports = {
     ItemListController
 }   

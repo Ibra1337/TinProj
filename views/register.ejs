@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles.css">
+    <script>
+        // JavaScript function to check if passwords match
+
+    </script>
+
 
 </head>
 <body>
@@ -14,7 +19,7 @@
             <h2>The Best Login Expirience you will ever have</h2>
             <br>
             
-            <form action="/register" method="post">
+            <form action="/register" method="post" onsubmit="return checkPasswords();">
 
                 <label for="name">Name:</label>
                 <% if (typeof msg !== 'undefined' && msg.name) { %>
