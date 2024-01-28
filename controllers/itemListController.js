@@ -80,7 +80,7 @@ class ItemListController
         console.log(prodid)
         let descriptions = await dbHandelr.getProdDescription(db , prodid);
         console.log(descriptions)
-        res.render('itemDetails' , {descriptions})
+        res.render('itemDetails' , {prodid , descriptions})
     }
 
 
@@ -95,8 +95,11 @@ class ItemListController
             return
         }
         const cart =  JSON.parse(cartCookie);
-        const user =  await this.cookieHandler.checkJWT(req.cookies.TC);
-        
+        let user = undefined;
+        if (req.cookies.TC)
+        {
+            user =  await this.cookieHandler.checkJWT(req.cookies.TC);
+        }
         console.log('cart: ' ,  cartCookie);
         
 
@@ -129,7 +132,7 @@ class ItemListController
             res.render('cartUser' , {dispCart , sum} );
         }else 
         {
-            res.render('cartGuset' , {dispCart});
+            res.render('cartGuest' , {dispCart , sum});
         }
     }
 
@@ -193,7 +196,7 @@ class ItemListController
     logOff = async (req , res ) =>
     {
         const cartCookie = req.cookies.gamersCart;
-        if (cartCookie !== 'init')
+        if (cartCookie !== 'init' && cartCookie !== undefined)
         {
         const cart =  JSON.parse(cartCookie);
         const user =  await this.cookieHandler.checkJWT(req.cookies.TC);
