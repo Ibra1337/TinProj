@@ -9,8 +9,8 @@ const initDb = ()=>{
 
     const insertDataStatement = fs.readFileSync('dbScripts/insert.sql' , 'utf8');
     let db  = new sql.Database("shopDB.db");
-//    db.exec(createStatement);
-//    db.exec(insertDataStatement);
+    //db.exec(createStatement);
+    //db.exec(insertDataStatement);
     return  db;
 }
 
@@ -113,7 +113,26 @@ const insertUser = async (db, username, password , email)  => {
     });
 };
 
-const contains = async (db, sql, params) => {
+const runStatement = async(db , sql , params ) => 
+{
+    try {
+        return await db.run(sql , params);
+    }catch(err){
+        console.error(err);
+    }
+    
+}
+
+const sqlStatementExec = async (db , sql) => {
+    try {
+        db.exec(sql);
+    }catch (err)
+    {
+        console.error(err);
+    }
+};
+
+const getRows = async (db, sql, params) => {
     try {
         const rows = await new Promise((resolve, reject) => {
             db.all(sql, params, (err, rows) => {
@@ -125,6 +144,18 @@ const contains = async (db, sql, params) => {
                 }
             });
         });
+
+        return rows;
+
+    } catch (err) {
+        console.error(err.message);
+        throw new Error('Error executing database query');
+    }
+};
+
+const contains = async (db, sql, params) => {
+    try {
+        const rows = getRows(db , sql , params );
 
         const len = rows.length;
         console.log('len:', len);
@@ -139,9 +170,36 @@ const contains = async (db, sql, params) => {
     }
 };
 
+cartTotal = async (db,  userId) => {
+    return new Promise((resolve, reject) => {
+        const sql = `
+        SELECT
+          SUM(product.price * prodInCart.amount) AS totalSum
+        FROM
+            prodInCart
+        JOIN
+            product ON prodInCart.product_prodId = product.prodId
+        WHERE
+            prodInCart.cart_Users_userId = ?
+        `;
+
+        db.get(sql, [userId], (err, row) => {
+        if (err) {
+            reject(err);
+        } else {
+          resolve(row.totalSum || 0); // Return totalSum or 0 if no results
+        }
+    });
+    });
+}
+
+const get = async (db , sql,params) =>
+{
+    return await db.get(sql , params);
+}
+
 db = initDb();
-res = getProdDescription(db , 5);
-res.then(res => {console.log(res)})
+
 
 
 
@@ -153,7 +211,11 @@ module.exports = {
     containsEmail ,
     insertUser ,
     containsUsername,
-    contains
-    
+    contains ,
+    getRows ,
+    runStatement    ,
+    get,
+    sqlStatementExec ,
+    cartTotal
 }
 

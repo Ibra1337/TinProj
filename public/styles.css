@@ -41,3 +41,81 @@ body {
     text-align: center;
     background-color: blueviolet;
 }
+
+
+
+/* Your existing styles */
+.topbar {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    background-color: gray;
+}
+
+.leftpart, .rightpart {
+    padding: 5px; /* Add padding for better visual */
+}
+
+.rightpart{
+    padding-right: 10 px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto;
+}
+
+.wrap {
+    border: 1px solid;
+    border-color: black;
+    align-items: center;
+    display: flex;
+}
+.topElement {
+    align-items: center;
+    padding: 13px;
+}
+
+.wrap a {
+    text-decoration: none; /* Remove underline */
+    color: #000; /* Set text color */
+}
+
+.wrap :hover {
+    background-color: rgb(0, 0, 0);
+    color: blueviolet;
+    border: 1px;
+}
+table{
+    background-color: blueviolet;
+}
+
+.orderTables table {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: blueviolet;
+    width: 75%;
+}
+
+.orderTables h1 {
+    margin-left: auto;
+    margin-right: auto;
+}
+.yorders {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.orderDiv {
+    color: yellow;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    width: 75%;
+    margin: auto;
+}
+
+.orderDiv a {
+    padding: 3%;
+    font-size: 20px; 
+}

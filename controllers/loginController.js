@@ -29,11 +29,12 @@ class LoginController {
     
     
         try {
-            const foundUser = await dbHandelr.contains(db,
+            const rows = await dbHandelr.getRows(db,
                 'SELECT * FROM users where username = ? and password = ?',
                 [username, password]
             );
-    
+            const foundUser = rows[0];
+            console.log("found USR: " , foundUser);
             if (foundUser) {
                 
                 
@@ -45,11 +46,11 @@ class LoginController {
                 if(rememberMe)
                 {
                     console.log(3)
-                const token = jwt.sign({ user: userdto }, secretKey, { expiresIn: '7d' });
+                const token = jwt.sign({ user: foundUser }, secretKey, { expiresIn: '7d' });
                 res.cookie('TC', token, { httpOnly: false });
                 
                 }else{
-                    const token = jwt.sign({ user: userdto }, secretKey, { expiresIn: '1h' });
+                    const token = jwt.sign({ user: foundUser }, secretKey, { expiresIn: '1h' });
                     res.cookie('TC', token, { httpOnly: false });
                 }
                 res.redirect('/');

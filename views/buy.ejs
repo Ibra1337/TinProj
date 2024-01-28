@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <script>
+
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+    
+        function showDialog() {
+            var dialog = document.createElement('div');
+            dialog.innerHTML = '<p>Congratulations on your purchase your equipment will arive to you soon!!!</p>';
+            
+            var closeButton = document.createElement('button');
+            closeButton.textContent = 'go back to the shop';
+            closeButton.onclick = function() {
+    
+                window.location.href = "/";
+            };
+    
+            dialog.appendChild(closeButton);
+    
+    
+            dialog.style.position = 'fixed';
+            dialog.style.top = '50%';
+            dialog.style.left = '50%';
+            dialog.style.transform = 'translate(-50%, -50%)';
+            dialog.style.backgroundColor = 'white';
+            dialog.style.padding = '20px';
+            dialog.style.border = '1px solid #ccc';
+            dialog.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+            dialog.style.zIndex = '1000';
+    
+            document.body.appendChild(dialog);
+        }
+
+        window.onload = function() {
+
+ 
+
+            setCookie('gamersCart', 'init', 30);
+            showDialog()
+        };
+    </script>
+    
+</body>
+</html>

@@ -15,14 +15,20 @@ class Router {
         this.router.get('/' , itemControler.get );
         
         this.router.get('/details/prodid=:productId', itemControler.get_details);
-
-        this.router.post('/addToCart' , itemControler.post_addToCart );
         
         this.router.get('/login' , loginController.get );
         this.router.post('/login' , loginController.post );
 
         this.router.get('/register' , registerController.get )
         this.router.post('/register' , registerController.post );
+        
+        this.router.get('/cart' , itemControler.getCart );
+
+        this.router.post('/buy', itemControler.buy )
+        
+        this.router.get('/logOff' , itemControler.logOff);
+
+        this.router.get('/myAccount' , itemControler.orders );
     }
 
     getDb(){

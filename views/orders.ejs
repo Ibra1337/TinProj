@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>My Orders</title>
+
+</head>
+<body>
+    <div class="goBack">
+        <a href="/" style="font-size: 30px;color: yellow;"> &lt;-Go Back</a>
+        </div> 
+    <div class="orderDiv" id="orderDiv">
+
+    <div class="yorders">
+    <h1>Your Orders</h1>
+    </div>
+
+    <div class="orderTables">
+    <% if (records.length > 0) { %>
+        <% for (let i = 0; i < records.length; i++) { %>
+            <h2>Order <%= records[i][0].orderID %></h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th> </th>
+                        <th>Product</th>
+                        <th>Amount</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let j = 0; j < records[i].length; j++) { %>
+                        <tr>
+                            <td>
+                                <img src="./images/itemImages/<%= records[i][j].prodId %>.png" alt="<%= records[i][j].name %> Image" width="100" height="75">
+                            </td>
+                            <td><%= records[i][j].name %></td>
+                            <td><%= records[i][j].amount %></td>
+                            <td>$<%= records[i][j].price.toFixed(2) %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <p>Total: $<%= sums[i].toFixed(2) %></p>
+        <% } %>
+    <% } else { %>
+        <p>No orders found.</p>
+    <% } %>
+    </div>
+</div>
+
+</body>
+</html>
